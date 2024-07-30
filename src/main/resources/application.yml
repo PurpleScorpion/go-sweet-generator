@@ -1,0 +1,42 @@
+sweet:
+  db:
+    username: root
+    password: root
+    host: localhost
+    port: 3306
+    dbName: my_db
+
+  # 生成代码的目录结构
+  mainPath: src/main/golang
+
+  # common包的moduleName , 详情请查看common包下的go.mod
+  moduleName:
+    common: ems-common
+    src: ems-src
+
+  # 表前缀, 若不想要此功能, 则设置为 SWEET
+  # 此功能主要是为了美化生成的Model, 去掉表前缀, 如: sys_user, 去掉前缀sys_就是 User.go.
+  tablePrefix: SWEET # 表前缀 例如 sys_
+
+  tableName:
+    - mst_device_type
+    - device_business
+
+  filedType:
+    - varchar=string
+    - text=string
+    - char=string
+    - tinytext=string
+    - mediumtext=string
+    - longtext=string
+    - int=int32
+    - tinyint=int32
+    - smallint=int32
+    - mediumint=int32
+    - integer=int32
+    - float=float64
+    - double=float64
+    - bigint=int64
+    - date=time.Time
+    - datetime=time.Time
+    - timestamp=time.Time
