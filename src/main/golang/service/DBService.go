@@ -12,7 +12,15 @@ import (
 
 func connMySQL() *sql.DB {
 	username := utils.ValueString("${sweet.db.username}")
-	password := utils.ValueString("${sweet.db.password}")
+
+	pwd := utils.ValueObject("${sweet.mysql.password}")
+	password := ""
+	switch pwd.(type) {
+	case int:
+		password = fmt.Sprintf("%d", pwd.(int))
+	case string:
+		password = pwd.(string)
+	}
 	dbName := utils.ValueString("${sweet.db.dbName}")
 	host := utils.ValueString("${sweet.db.host}")
 	port := utils.ValueInt("${sweet.db.port}")
