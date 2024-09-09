@@ -68,7 +68,7 @@ func getServiceSave(tb model.Tables) string {
 	var name = getGoModelName(tb.Name)
 	str := `
 func (that *` + name + `Service) Insert(pojo models.` + name + `) utils.R {
-    count := mapper.InsertCustom(&pojo, true, false)
+    count := mapper.InsertCustom(&pojo, true)
 	if count == 0 {
 		return utils.Fail(500, "Insert failed")
 	}
@@ -138,7 +138,7 @@ func getServiceImport(tb model.Tables) string {
 
 	str := `import (`
 	str += line
-	str += `    "github.com/PurpleScorpion/go-sweet-orm/mapper"`
+	str += `    "github.com/PurpleScorpion/go-sweet-orm/v2/mapper"`
 	str += line
 	str += fmt.Sprintf(`    "%s/vo"`, commonName)
 	str += line
