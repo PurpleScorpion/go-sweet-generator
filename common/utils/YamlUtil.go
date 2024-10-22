@@ -5,6 +5,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"os"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -41,6 +42,25 @@ func ValueBool(key string) bool {
 
 func ValueString(key string) string {
 	val := getYamlValue(key)
+	if val == nil {
+		return ""
+	}
+	switch v := val.(type) {
+	case float64:
+		return Num2Str(v)
+	case float32:
+		return Num2Str(v)
+	case int:
+		return Num2Str(v)
+	case int8:
+		return Num2Str(v)
+	case int16:
+		return Num2Str(v)
+	case int32:
+		return Num2Str(v)
+	case int64:
+		return Num2Str(v)
+	}
 	return val.(string)
 }
 
@@ -114,4 +134,46 @@ func InitYml() {
 	yaml.Unmarshal(data, &conf1)
 	cache.New(cache.NoExpiration, cache.NoExpiration)
 	cache.SweetCache.Set("ymlConf", conf1, cache.NoExpiration)
+}
+
+func Num2Str(obj interface{}) string {
+	if obj == nil {
+		return ""
+	}
+	switch num := obj.(type) {
+	case int:
+		return int64ToStr(int64(num))
+	case int8:
+		return int64ToStr(int64(num))
+	case int16:
+		return int64ToStr(int64(num))
+	case int32:
+		return int64ToStr(int64(num))
+	case int64:
+		return int64ToStr(num)
+	case uint:
+		return uint64ToStr(uint64(num))
+	case uint8:
+		return uint64ToStr(uint64(num))
+	case uint16:
+		return uint64ToStr(uint64(num))
+	case uint32:
+		return uint64ToStr(uint64(num))
+	case uint64:
+		return uint64ToStr(num)
+	case float32:
+		return strconv.FormatFloat(float64(num), 'f', -1, 32)
+	case float64:
+		return strconv.FormatFloat(num, 'f', -1, 64)
+	default:
+		return ""
+	}
+}
+
+func int64ToStr(num int64) string {
+	return strconv.FormatInt(num, 10)
+}
+
+func uint64ToStr(num uint64) string {
+	return strconv.FormatUint(num, 10)
 }
