@@ -1,10 +1,10 @@
 sweet:
   db:
     username: root
-    password: root
-    host: localhost
-    port: 3306
-    dbName: my_db
+    password: smartedge
+    host: 192.168.251.3
+    port: 33306
+    dbName: std_cloud_ems
 
   # 生成代码的目录结构
   mainPath: src/main/golang
@@ -19,8 +19,9 @@ sweet:
   tablePrefix: SWEET # 表前缀 例如 sys_
 
   tableName:
-    - mst_device_type
-    - device_business
+    - mst_city
+    - mst_city_amedas
+    - mst_amedas_station
 
   filedType:
     - varchar=string
@@ -36,6 +37,7 @@ sweet:
     - integer=int32
     - float=float64
     - double=float64
+    - decimal=float64
     - bigint=int64
     - date=time.Time
     - datetime=time.Time
