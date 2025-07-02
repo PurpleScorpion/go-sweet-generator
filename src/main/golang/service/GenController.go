@@ -13,6 +13,8 @@ func generatorController(basePath string, tb model.Tables) {
 		panic(err)
 	}
 
+	name := getGoModelName(tb.Name)
+
 	str := `package controllers`
 	str += line
 	str += line
@@ -24,7 +26,7 @@ func generatorController(basePath string, tb model.Tables) {
 	str += getControllerSave(tb)
 	str += getControllerUpdate(tb)
 	str += getControllerDeleteById(tb)
-	filePath := basePath + "/" + utils.SnakeToPascal(tb.Name) + "Controller.go"
+	filePath := basePath + "/" + utils.SnakeToPascal(name) + "Controller.go"
 	os.WriteFile(filePath, []byte(str), 0644)
 }
 

@@ -12,7 +12,7 @@ func generatorService(basePath string, tb model.Tables) {
 	if err := os.MkdirAll(basePath, os.ModePerm); err != nil {
 		panic(err)
 	}
-
+	var name = getGoModelName(tb.Name)
 	str := `package service`
 	str += line
 	str += line
@@ -23,7 +23,7 @@ func generatorService(basePath string, tb model.Tables) {
 	str += getServiceSave(tb)
 	str += getServiceUpdate(tb)
 	str += getServiceDeleteById(tb)
-	filePath := basePath + "/" + utils.SnakeToPascal(tb.Name) + "Service.go"
+	filePath := basePath + "/" + utils.SnakeToPascal(name) + "Service.go"
 	os.WriteFile(filePath, []byte(str), 0644)
 
 }

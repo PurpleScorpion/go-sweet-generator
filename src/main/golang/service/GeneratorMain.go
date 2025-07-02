@@ -37,9 +37,11 @@ func generatorVO(tb model.Tables) {
 		panic(err)
 	}
 
+	className := getGoModelName(tb.Name)
+
 	str := `package vo`
 	str += getModelImports(tb)
-	str += "type " + getGoModelName(tb.Name) + "VO" + " struct{"
+	str += "type " + className + "VO" + " struct{"
 	str += line
 	str += "    DefaultPageVO"
 	str += line
@@ -50,7 +52,7 @@ func generatorVO(tb model.Tables) {
 
 	str += `}`
 
-	filePath := basePath + "/" + utils.SnakeToPascal(tb.Name) + "VO" + ".go"
+	filePath := basePath + "/" + utils.SnakeToPascal(className) + "VO" + ".go"
 	os.WriteFile(filePath, []byte(str), 0644)
 }
 
@@ -60,9 +62,11 @@ func generatorModel(basePath string, tb model.Tables) {
 		panic(err)
 	}
 
+	className := getGoModelName(tb.Name)
+
 	str := `package models`
 	str += getModelImports(tb)
-	str += "type " + getGoModelName(tb.Name) + " struct{"
+	str += "type " + className + " struct{"
 	str += line
 	for _, filed := range tb.Fileds {
 		if filed.Key {
@@ -84,7 +88,7 @@ func generatorModel(basePath string, tb model.Tables) {
 	str += line
 	str += `}`
 
-	filePath := basePath + "/" + utils.SnakeToPascal(tb.Name) + ".go"
+	filePath := basePath + "/" + utils.SnakeToPascal(className) + ".go"
 	os.WriteFile(filePath, []byte(str), 0644)
 }
 
