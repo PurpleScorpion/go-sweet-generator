@@ -82,7 +82,7 @@ func generatorModel(basePath string, tb model.Tables) {
 	str += line
 	str += line
 	str += line
-	str += `func (` + utils.SnakeToPascal(tb.Name) + `) TableName() string {`
+	str += `func (` + utils.SnakeToPascal(className) + `) TableName() string {`
 	str += line
 	str += `    return "` + tb.Name + `"`
 	str += line

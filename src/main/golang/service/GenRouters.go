@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"github.com/PurpleScorpion/go-sweet-keqing/keqing"
 	"os"
 	"sweet-common/utils"
 	"sweet-src/main/golang/model"
@@ -30,15 +31,15 @@ func getRouterInit(arr []model.Tables) string {
 	for i := 0; i < len(arr); i++ {
 		tb := arr[i]
 		name := getGoModelName(tb.Name)
-		str += `    beego.Router("/` + utils.Lcfirst(name) + `/pageData", &controllers.` + name + `Controller{}, "post:PageData")`
+		str += `    beego.Router("/` + keqing.Camel2WebURL(name) + `/page-data", &controllers.` + name + `Controller{}, "post:PageData")`
 		str += line
-		str += `    beego.Router("/` + utils.Lcfirst(name) + `/getById/:id", &controllers.` + name + `Controller{}, "get:GetById")`
+		str += `    beego.Router("/` + keqing.Camel2WebURL(name) + `/id/:id", &controllers.` + name + `Controller{}, "get:GetById")`
 		str += line
-		str += `    beego.Router("/` + utils.Lcfirst(name) + `/deleteById/:id", &controllers.` + name + `Controller{}, "get:DeleteById")`
+		str += `    beego.Router("/` + keqing.Camel2WebURL(name) + `/delete/:id", &controllers.` + name + `Controller{}, "delete:DeleteById")`
 		str += line
-		str += `    beego.Router("/` + utils.Lcfirst(name) + `/insert", &controllers.` + name + `Controller{}, "post:Insert")`
+		str += `    beego.Router("/` + keqing.Camel2WebURL(name) + `/insert", &controllers.` + name + `Controller{}, "post:Insert")`
 		str += line
-		str += `    beego.Router("/` + utils.Lcfirst(name) + `/update", &controllers.` + name + `Controller{}, "post:Update")`
+		str += `    beego.Router("/` + keqing.Camel2WebURL(name) + `/update", &controllers.` + name + `Controller{}, "put:Update")`
 		str += line
 		str += line
 	}
