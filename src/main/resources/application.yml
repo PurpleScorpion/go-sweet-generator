@@ -16,12 +16,10 @@ sweet:
 
   # 表前缀, 若不想要此功能, 则设置为 SWEET
   # 此功能主要是为了美化生成的Model, 去掉表前缀, 如: sys_user, 去掉前缀sys_就是 User.go.
-  tablePrefix: SWEET # 表前缀 例如 sys_
+  tablePrefix: mst_ # 表前缀 例如 sys_
 
   tableName:
-    - mst_city
-    - mst_city_amedas
-    - mst_amedas_station
+    - mst_device_kind
 
   filedType:
     - varchar=string
@@ -40,5 +38,6 @@ sweet:
     - decimal=float64
     - bigint=int64
     - date=time.Time
+    - time=time.Time
     - datetime=time.Time
     - timestamp=time.Time
